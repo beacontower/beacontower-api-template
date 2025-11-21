@@ -1,4 +1,5 @@
 # Beacon Tower API Templates
+# Beacon Tower API Templates
 
 Modern .NET 8 API project templates with Aspire and Kubernetes support.
 
