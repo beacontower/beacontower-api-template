@@ -1,0 +1,25 @@
+# K3s-specific deployment overrides
+# Use with: kubectl apply -f kubernetes/deployment.yaml && kubectl apply -f kubernetes/k3s/deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapi
+spec:
+  replicas: 2  # Lower replica count for integration environment
+
+  template:
+    spec:
+      containers:
+      - name: myapi
+        resources:
+          requests:
+            cpu: 50m      # Lower resource requests for K3s
+            memory: 64Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Staging"  # Use Staging environment for K3s

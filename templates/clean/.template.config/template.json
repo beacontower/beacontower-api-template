@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Beacon Tower",
+  "classifications": [
+    "Web",
+    "API",
+    "Microservice",
+    "Aspire",
+    "Cloud",
+    "Clean Architecture"
+  ],
+  "identity": "BeaconTower.Api.CleanArchitecture.CSharp",
+  "name": "Beacon Tower Clean Architecture API",
+  "shortName": "bt-api-clean",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "MyApi",
+  "preferNameDirectory": true,
+  "description": "Modern .NET 8 Clean Architecture API with Core/Infrastructure/API layers, Aspire orchestration, and Kubernetes deployment",
+  "symbols": {
+    "GitHubOrg": {
+      "type": "parameter",
+      "datatype": "text",
+      "replaces": "beacontower",
+      "defaultValue": "beacontower",
+      "description": "GitHub organization name for container registry and package feeds"
+    },
+    "ContainerRegistry": {
+      "type": "parameter",
+      "datatype": "text",
+      "replaces": "btcontainerregistry.azurecr.io",
+      "defaultValue": "btcontainerregistry.azurecr.io",
+      "description": "Container registry URL (e.g., btcontainerregistry.azurecr.io)"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "text",
+      "replaces": "Beacon Tower",
+      "defaultValue": "Beacon Tower",
+      "description": "Author name for package metadata and copyright"
+    },
+    "EnablePostgreSQL": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include PostgreSQL database with Entity Framework Core"
+    },
+    "EnableRedis": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include Redis cache for distributed caching"
+    },
+    "EnableSwagger": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include Swagger/OpenAPI documentation"
+    },
+    "IncludeExamples": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include example WeatherForecast entity, service, and controller"
+    },
+    "SkipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Skip running 'dotnet restore' after project creation"
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!IncludeExamples)",
+          "exclude": [
+            "**/Entities/WeatherForecast.cs",
+            "**/Interfaces/IWeatherService.cs",
+            "**/Services/WeatherService.cs",
+            "**/Controllers/WeatherController.cs",
+            "**/WeatherTests.cs"
+          ]
+        },
+        {
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**",
+            "**/.vs/**",
+            "**/.vscode/**",
+            "**/.git/**",
+            "**/.gitignore",
+            "**/node_modules/**",
+            "**/*.user",
+            "**/*.suo",
+            "**/.DS_Store",
+            "**/TestResults/**",
+            "**/coverage/**",
+            "**/.idea/**"
+          ]
+        }
+      ]
+    }
+  ],
+  "postActions": [
+    {
+      "condition": "(!SkipRestore)",
+      "description": "Restore NuGet packages",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet restore' to restore NuGet packages"
+        }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    },
+    {
+      "description": "Apply Entity Framework migrations",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet ef database update' in the API project to create the database schema"
+        }
+      ],
+      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6"
+    },
+    {
+      "description": "Open project in IDE",
+      "manualInstructions": [
+        {
+          "text": "Open the generated solution file in Visual Studio, Rider, or VS Code"
+        }
+      ],
+      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6"
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "MyApi.sln"
+    }
+  ]
+}

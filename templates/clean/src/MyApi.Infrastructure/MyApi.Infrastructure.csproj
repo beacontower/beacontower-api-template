@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MyApi.Infrastructure</RootNamespace>
+    <AssemblyName>MyApi.Infrastructure</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Aspire PostgreSQL (includes EF Core) -->
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
+
+    <!-- Redis -->
+    <PackageReference Include="Aspire.StackExchange.Redis" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyApi.Core\MyApi.Core.csproj" />
+  </ItemGroup>
+
+</Project>

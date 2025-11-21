@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json.schemastore.org/dotnetcli.host",
+  "symbolInfo": {
+    "GitHubOrg": {
+      "longName": "github-org",
+      "shortName": "go"
+    },
+    "ContainerRegistry": {
+      "longName": "container-registry",
+      "shortName": "cr"
+    },
+    "Author": {
+      "longName": "author",
+      "shortName": "a"
+    },
+    "EnablePostgreSQL": {
+      "longName": "postgres",
+      "shortName": "pg"
+    },
+    "EnableRedis": {
+      "longName": "redis",
+      "shortName": "r"
+    },
+    "EnableSwagger": {
+      "longName": "swagger",
+      "shortName": "sw"
+    },
+    "IncludeExamples": {
+      "longName": "include-examples",
+      "shortName": "ex"
+    },
+    "SkipRestore": {
+      "longName": "skip-restore"
+    }
+  }
+}

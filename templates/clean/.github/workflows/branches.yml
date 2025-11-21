@@ -1,0 +1,108 @@
+name: Feature/Bugfix/Hotfix Branch Build
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+      - 'bugfix/**'
+      - 'hotfix/**'
+      - 'develop'
+
+env:
+  DOTNET_VERSION: '10.0.x'
+  IMAGE_NAME: ${{ github.event.repository.name }}
+  CONTAINER_REGISTRY: ${{ vars.CONTAINER_REGISTRY_URL }}
+
+concurrency:
+  group: branch-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    uses: beacontower/github-workflows/.github/workflows/dotnet-build.yml@main
+    with:
+      dotnet-version: ${{ vars.DOTNET_VERSION || '10.0.x' }}
+      solution-path: '**/*.sln'
+      build-configuration: 'Release'
+      warnings-as-errors: true
+      enable-nuget-cache: true
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  test:
+    name: Test
+    needs: build
+    uses: beacontower/github-workflows/.github/workflows/dotnet-test.yml@main
+    with:
+      dotnet-version: ${{ vars.DOTNET_VERSION || '10.0.x' }}
+      test-project-pattern: '**/*Tests.csproj'
+      build-configuration: 'Release'
+      enable-code-coverage: true
+      coverage-threshold: 0
+      collect-test-results: true
+
+  version:
+    name: Generate Prerelease Version
+    needs: [build, test]
+    uses: beacontower/github-workflows/.github/workflows/calculate-prerelease-version.yml@main
+
+  container:
+    name: Build & Push Container
+    needs: version
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    uses: beacontower/github-workflows/.github/workflows/dotnet-container.yml@main
+    with:
+      dockerfile-path: './Dockerfile'
+      docker-context: '.'
+      image-name: ${{ github.event.repository.name }}
+      version: ${{ needs.version.outputs.version }}
+      registry: ${{ vars.CONTAINER_REGISTRY_URL }}
+      push-image: true
+      enable-security-scan: true
+    secrets:
+      REGISTRY_USERNAME: ${{ vars.CR_TOKEN_NAME }}
+      REGISTRY_PASSWORD: ${{ secrets.AZURE_CR_TOKEN }}
+
+  branch-summary:
+    name: Branch Build Summary
+    runs-on: ubuntu-latest
+    needs: [version, container]
+    if: always()
+
+    steps:
+      - name: Generate build summary
+        run: |
+          echo "## 🔨 Branch Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Version**: ${{ needs.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Artifacts Published" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [[ "${{ needs.container.result }}" == "success" ]]; then
+            BRANCH_TAG=$(echo "${{ github.ref_name }}" | sed 's/[\/]/-/g')
+            echo "✅ Container:" >> $GITHUB_STEP_SUMMARY
+            echo "  - ${{ env.CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+            echo "  - ${{ env.CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${BRANCH_TAG}-latest" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Container: Failed" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Usage" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Pull prerelease container**:" >> $GITHUB_STEP_SUMMARY
+          echo '```bash' >> $GITHUB_STEP_SUMMARY
+          echo "docker pull ${{ env.CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Kubernetes deployment:**" >> $GITHUB_STEP_SUMMARY
+          echo '```bash' >> $GITHUB_STEP_SUMMARY
+          echo "kubectl set image deployment/${{ env.IMAGE_NAME }} ${{ env.IMAGE_NAME }}=${{ env.CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Beacon Tower",
+  "classifications": [
+    "Web",
+    "API",
+    "Microservice",
+    "Aspire",
+    "Cloud"
+  ],
+  "identity": "BeaconTower.Api.Minimal.CSharp",
+  "name": "Beacon Tower Minimal API",
+  "shortName": "bt-api-minimal",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "MyApi",
+  "preferNameDirectory": true,
+  "description": "Modern .NET 8 Minimal API with Aspire orchestration, PostgreSQL, Redis, and Kubernetes deployment",
+  "symbols": {
+    "GitHubOrg": {
+      "type": "parameter",
+      "datatype": "text",
+      "replaces": "beacontower",
+      "defaultValue": "beacontower",
+      "description": "GitHub organization name for container registry and package feeds"
+    },
+    "ContainerRegistry": {
+      "type": "parameter",
+      "datatype": "text",
+      "replaces": "btcontainerregistry.azurecr.io",
+      "defaultValue": "btcontainerregistry.azurecr.io",
+      "description": "Container registry URL (e.g., btcontainerregistry.azurecr.io)"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "text",
+      "replaces": "Beacon Tower",
+      "defaultValue": "Beacon Tower",
+      "description": "Author name for package metadata and copyright"
+    },
+    "EnablePostgreSQL": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include PostgreSQL database in Aspire AppHost"
+    },
+    "EnableRedis": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include Redis cache in Aspire AppHost"
+    },
+    "EnableSwagger": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include Swagger/OpenAPI documentation"
+    },
+    "SkipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Skip running 'dotnet restore' after project creation"
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**",
+            "**/.vs/**",
+            "**/.vscode/**",
+            "**/.git/**",
+            "**/.gitignore",
+            "**/node_modules/**",
+            "**/*.user",
+            "**/*.suo",
+            "**/.DS_Store",
+            "**/TestResults/**",
+            "**/coverage/**",
+            "**/.idea/**"
+          ]
+        }
+      ]
+    }
+  ],
+  "postActions": [
+    {
+      "condition": "(!SkipRestore)",
+      "description": "Restore NuGet packages",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet restore' to restore NuGet packages"
+        }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    },
+    {
+      "description": "Open project in IDE",
+      "manualInstructions": [
+        {
+          "text": "Open the generated solution file in Visual Studio, Rider, or VS Code"
+        }
+      ],
+      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6"
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "MyApi.sln"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageId>BeaconTower.Templates.Api</PackageId>
+    <Title>Beacon Tower API Templates</Title>
+    <Authors>Beacon Tower</Authors>
+    <Description>Modern .NET 8 API project templates with Aspire orchestration and Kubernetes deployment. Includes Minimal API and Clean Architecture patterns.</Description>
+    <PackageTags>dotnet-new;templates;api;aspire;kubernetes;beacontower;minimal;clean-architecture</PackageTags>
+    <PackageProjectUrl>https://github.com/beacontower/beacontower-api-template</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/beacontower/beacontower-api-template</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright © Beacon Tower</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <TargetFramework>net8.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Include README in package -->
+    <None Include="README.md" Pack="true" PackagePath="\" />
+
+    <!-- Include all template content -->
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**;templates\**\.vs\**;templates\**\.vscode\**;templates\**\.git\**;templates\**\node_modules\**;templates\**\TestResults\**;templates\**\coverage\**;templates\**\.idea\**;templates\**\*.user;templates\**\*.suo;BeaconTower.Templates.Api.csproj" />
+
+    <!-- Include template configuration files -->
+    <Content Include=".template.config\**\*" />
+  </ItemGroup>
+
+</Project>

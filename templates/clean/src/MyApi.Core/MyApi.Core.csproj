@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MyApi.Core</RootNamespace>
+    <AssemblyName>MyApi.Core</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- No external dependencies - this is the clean core -->
+  </ItemGroup>
+
+</Project>
