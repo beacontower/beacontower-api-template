@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/beacontower/beacontower-api-template/compare/v1.0.0...v1.0.1) (2025-12-06)
+
+
+### Bug Fixes
+
+* update templates for .NET 10 and improve CI/CD ([1d726e4](https://github.com/beacontower/beacontower-api-template/commit/1d726e420715547d7dd4c1ca14a6596b9bba368f))
+
 # 1.0.0 (2025-11-21)
 
 
