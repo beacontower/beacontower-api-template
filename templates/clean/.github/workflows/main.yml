@@ -64,30 +64,17 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install semantic-release
-        run: |
-          npm install -g \
-            semantic-release@23 \
-            @semantic-release/changelog@6 \
-            @semantic-release/git@10 \
-            @semantic-release/github@10
-
-      - name: Run semantic-release
+      - name: Semantic Release
         id: semantic
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          semantic_version: 23
+          extra_plugins: |
+            @semantic-release/changelog@6
+            @semantic-release/git@10
+            @semantic-release/github@10
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIT_AUTHOR_NAME: github-actions[bot]
-          GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
-          GIT_COMMITTER_NAME: github-actions[bot]
-          GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
-        run: |
-          npx semantic-release
-
-      - name: Output release info
-        if: steps.semantic.outputs.new_release_published == 'true'
-        run: |
-          echo "New version released: ${{ steps.semantic.outputs.new_release_version }}"
-          echo "Release notes: ${{ steps.semantic.outputs.new_release_notes }}"
 
   container:
     name: Build & Push Container

@@ -18,7 +18,7 @@
   },
   "sourceName": "MyApi",
   "preferNameDirectory": true,
-  "description": "Modern .NET 8 Clean Architecture API with Core/Infrastructure/API layers, Aspire orchestration, and Kubernetes deployment",
+  "description": "Modern .NET 10 Clean Architecture API with Core/Infrastructure/API layers, Aspire orchestration, and Kubernetes deployment",
   "symbols": {
     "GitHubOrg": {
       "type": "parameter",
@@ -92,7 +92,6 @@
             "**/.vs/**",
             "**/.vscode/**",
             "**/.git/**",
-            "**/.gitignore",
             "**/node_modules/**",
             "**/*.user",
             "**/*.suo",
@@ -116,24 +115,6 @@
       ],
       "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
       "continueOnError": true
-    },
-    {
-      "description": "Apply Entity Framework migrations",
-      "manualInstructions": [
-        {
-          "text": "Run 'dotnet ef database update' in the API project to create the database schema"
-        }
-      ],
-      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6"
-    },
-    {
-      "description": "Open project in IDE",
-      "manualInstructions": [
-        {
-          "text": "Open the generated solution file in Visual Studio, Rider, or VS Code"
-        }
-      ],
-      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6"
     }
   ],
   "primaryOutputs": [

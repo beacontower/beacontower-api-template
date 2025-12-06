@@ -1,8 +1,8 @@
 <Project>
   <PropertyGroup>
     <!-- Target Framework -->
-    <TargetFramework>net8.0</TargetFramework>
-    <LangVersion>12</LangVersion>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14</LangVersion>
 
     <!-- Code Quality -->
     <Nullable>enable</Nullable>
@@ -43,6 +43,6 @@
 
   <!-- Package References (SourceLink) -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 </Project>
