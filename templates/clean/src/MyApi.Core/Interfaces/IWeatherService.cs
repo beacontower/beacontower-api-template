@@ -13,5 +13,5 @@ public interface IWeatherService
     /// <param name="days">Number of days to forecast.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>Collection of weather forecasts.</returns>
-    Task<IEnumerable<WeatherForecast>> GetForecastAsync(int days, CancellationToken cancellationToken = default);
+    public Task<IEnumerable<WeatherForecast>> GetForecastAsync(int days, CancellationToken cancellationToken = default);
 }

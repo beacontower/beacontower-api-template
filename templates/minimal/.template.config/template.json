@@ -16,9 +16,32 @@
     "type": "project"
   },
   "sourceName": "MyApi",
-  "preferNameDirectory": true,
+  "preferNameDirectory": false,
   "description": "Modern .NET 10 Minimal API with Aspire orchestration, PostgreSQL, Redis, and Kubernetes deployment",
   "symbols": {
+    "nameLower": {
+      "type": "generated",
+      "generator": "casing",
+      "parameters": {
+        "source": "name",
+        "toLower": true
+      }
+    },
+    "repoName": {
+      "type": "generated",
+      "generator": "regex",
+      "datatype": "string",
+      "parameters": {
+        "source": "nameLower",
+        "steps": [
+          {
+            "regex": "\\.",
+            "replacement": "-"
+          }
+        ]
+      },
+      "replaces": "myapi"
+    },
     "GitHubOrg": {
       "type": "parameter",
       "datatype": "text",

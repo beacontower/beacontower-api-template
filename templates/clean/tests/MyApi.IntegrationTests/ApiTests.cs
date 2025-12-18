@@ -23,7 +23,7 @@ public class ApiTests : IClassFixture<WebApplicationFactory<Program>>
     public async Task Health_Endpoint_Should_Return_Healthy()
     {
         // Act
-        var response = await _client.GetAsync("/health");
+        var response = await _client.GetAsync(new Uri("/health", UriKind.Relative));
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -35,7 +35,7 @@ public class ApiTests : IClassFixture<WebApplicationFactory<Program>>
     public async Task Alive_Endpoint_Should_Return_Healthy()
     {
         // Act
-        var response = await _client.GetAsync("/alive");
+        var response = await _client.GetAsync(new Uri("/alive", UriKind.Relative));
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -45,7 +45,7 @@ public class ApiTests : IClassFixture<WebApplicationFactory<Program>>
     public async Task Hello_Endpoint_Should_Return_Message()
     {
         // Act
-        var response = await _client.GetAsync("/api/v1/hello");
+        var response = await _client.GetAsync(new Uri("/api/v1/hello", UriKind.Relative));
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -59,7 +59,7 @@ public class ApiTests : IClassFixture<WebApplicationFactory<Program>>
     public async Task Weather_Endpoint_Should_Return_Forecast()
     {
         // Act
-        var response = await _client.GetAsync("/api/v1/weather");
+        var response = await _client.GetAsync(new Uri("/api/v1/weather", UriKind.Relative));
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -75,7 +75,7 @@ public class ApiTests : IClassFixture<WebApplicationFactory<Program>>
     public async Task Weather_Endpoint_Should_Accept_Days_Parameter(int days)
     {
         // Act
-        var response = await _client.GetAsync($"/api/v1/weather?days={days}");
+        var response = await _client.GetAsync(new Uri($"/api/v1/weather?days={days}", UriKind.Relative));
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -90,7 +90,7 @@ public class ApiTests : IClassFixture<WebApplicationFactory<Program>>
     public async Task Weather_Endpoint_Should_Reject_Invalid_Days(int days)
     {
         // Act
-        var response = await _client.GetAsync($"/api/v1/weather?days={days}");
+        var response = await _client.GetAsync(new Uri($"/api/v1/weather?days={days}", UriKind.Relative));
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);

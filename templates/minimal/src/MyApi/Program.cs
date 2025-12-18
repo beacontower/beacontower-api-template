@@ -51,6 +51,7 @@ api.MapGet("/hello", () => Results.Ok(new { Message = "Hello from MyApi!", Times
 api.MapGet("/weather", () =>
 {
     var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+#pragma warning disable CA5394 // Do not use insecure randomness - acceptable for example/demo code
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
@@ -59,6 +60,7 @@ api.MapGet("/weather", () =>
             summaries[Random.Shared.Next(summaries.Length)]
         ))
         .ToArray();
+#pragma warning restore CA5394
     return Results.Ok(forecast);
 })
     .WithName("GetWeatherForecast")

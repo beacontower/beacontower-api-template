@@ -1,8 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Aspire.AppHost.Sdk/9.0.0">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <IsAspireHost>true</IsAspireHost>
     <UserSecretsId>MyApi-AppHost-$(MSBuildProjectName)</UserSecretsId>
   </PropertyGroup>
 

@@ -3,6 +3,8 @@
   <PropertyGroup>
     <RootNamespace>MyApi</RootNamespace>
     <AssemblyName>MyApi</AssemblyName>
+    <!-- CA1515: API types need to be public for routing and serialization -->
+    <NoWarn>$(NoWarn);CA1515</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

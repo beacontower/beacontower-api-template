@@ -13,7 +13,7 @@ namespace Microsoft.Extensions.Hosting;
 /// Service defaults for Aspire applications.
 /// Provides standard observability, health checks, and service discovery.
 /// </summary>
-public static class Extensions
+public static class ServiceDefaultsExtensions
 {
     /// <summary>
     /// Adds service defaults to the host builder.
@@ -21,6 +21,8 @@ public static class Extensions
     /// </summary>
     public static IHostApplicationBuilder AddServiceDefaults(this IHostApplicationBuilder builder)
     {
+        ArgumentNullException.ThrowIfNull(builder);
+
         builder.ConfigureOpenTelemetry();
         builder.AddDefaultHealthChecks();
         builder.Services.AddServiceDiscovery();
@@ -41,6 +43,8 @@ public static class Extensions
     /// </summary>
     public static IHostApplicationBuilder ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
     {
+        ArgumentNullException.ThrowIfNull(builder);
+
         builder.Logging.AddOpenTelemetry(logging =>
         {
             logging.IncludeFormattedMessage = true;
@@ -85,6 +89,8 @@ public static class Extensions
     /// </summary>
     public static IHostApplicationBuilder AddDefaultHealthChecks(this IHostApplicationBuilder builder)
     {
+        ArgumentNullException.ThrowIfNull(builder);
+
         builder.Services.AddHealthChecks()
             // Add a default liveness check to ensure app is responsive
             .AddCheck("self", () => HealthCheckResult.Healthy(), ["live"]);
@@ -97,6 +103,8 @@ public static class Extensions
     /// </summary>
     public static WebApplication MapDefaultEndpoints(this WebApplication app)
     {
+        ArgumentNullException.ThrowIfNull(app);
+
         // Health check endpoints
         app.MapHealthChecks("/health");
         app.MapHealthChecks("/alive", new HealthCheckOptions

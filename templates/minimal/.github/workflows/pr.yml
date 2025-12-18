@@ -7,7 +7,7 @@ on:
       - master
 
 env:
-  DOTNET_VERSION: '8.0.x'
+  DOTNET_VERSION: '10.0.x'
   IMAGE_NAME: ${{ github.event.repository.name }}
   CONTAINER_REGISTRY: ${{ vars.CONTAINER_REGISTRY_URL }}
 
@@ -87,7 +87,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
       - name: Upload Trivy results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always() && hashFiles('trivy-results.sarif') != ''
         with:
           sarif_file: 'trivy-results.sarif'

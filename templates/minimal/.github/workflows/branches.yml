@@ -9,7 +9,7 @@ on:
       - 'develop'
 
 env:
-  DOTNET_VERSION: '8.0.x'
+  DOTNET_VERSION: '10.0.x'
   IMAGE_NAME: ${{ github.event.repository.name }}
   CONTAINER_REGISTRY: ${{ vars.CONTAINER_REGISTRY_URL }}
 
