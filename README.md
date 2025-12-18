@@ -1,7 +1,6 @@
 # Beacon Tower API Templates
-# Beacon Tower API Templates
 
-Modern .NET 8 API project templates with Aspire and Kubernetes support.
+Modern .NET 10 API project templates with Aspire and Kubernetes support.
 
 ## Templates
 
@@ -9,7 +8,7 @@ Modern .NET 8 API project templates with Aspire and Kubernetes support.
 Lightweight API using .NET Minimal APIs pattern. Best for microservices and simple APIs.
 
 **Features:**
-- .NET 8 with C# 12
+- .NET 10 with C# 14
 - Aspire for local orchestration
 - Minimal APIs with endpoint routing
 - Health checks and OpenAPI
@@ -37,7 +36,7 @@ Feature-focused CQRS architecture using MediatR. Best for complex domains with e
 ## Getting Started
 
 ### Prerequisites
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop) (for Aspire)
 - [Visual Studio 2022 17.12+](https://visualstudio.microsoft.com/) or [JetBrains Rider 2024.3+](https://www.jetbrains.com/rider/)
 

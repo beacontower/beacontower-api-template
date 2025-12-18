@@ -4,7 +4,7 @@
 
 ### 1. Minimal API Template (COMPLETE)
 
-A production-ready .NET 8 Minimal API template with full Aspire orchestration and Kubernetes deployment support.
+A production-ready .NET 10 Minimal API template with full Aspire orchestration and Kubernetes deployment support.
 
 #### Project Structure
 ```
@@ -57,7 +57,7 @@ templates/minimal/
 #### Features Implemented
 
 **Core Technologies:**
-- ✅ .NET 8 with C# 12
+- ✅ .NET 10 with C# 14
 - ✅ Aspire 9.0.0 for local orchestration
 - ✅ Minimal APIs with endpoint routing
 - ✅ Serilog structured logging
@@ -188,7 +188,7 @@ templates/minimal/
 ## Testing the Minimal API Template
 
 ### Prerequisites
-- .NET 8 SDK
+- .NET 10 SDK
 - Docker Desktop
 - Visual Studio 2022 17.12+ or Rider 2024.3+
 
@@ -271,7 +271,7 @@ Create comprehensive guides and working examples.
 ## Key Design Decisions
 
 1. **Separate Repositories** - Easier to version and maintain independently
-2. **.NET 8 + C# 12** - Latest LTS with modern language features
+2. **.NET 10 + C# 14** - Latest with modern language features
 3. **Full Aspire Integration** - Required for local development standardization
 4. **GitHub Packages** - Moving away from Azure Artifacts
 5. **K8s + K3s** - Production and integration environments
@@ -335,7 +335,7 @@ Templates implement requirements from `product-docs/isms`:
 ## Summary
 
 The **Minimal API template** is **production-ready** and includes:
-- ✅ Complete .NET 8 + Aspire solution
+- ✅ Complete .NET 10 + Aspire solution
 - ✅ GitHub Actions CI/CD workflows
 - ✅ Kubernetes manifests for production and integration
 - ✅ Security scanning and compliance
