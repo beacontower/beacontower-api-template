@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/beacontower/beacontower-api-template/compare/v1.0.2...v1.0.3) (2025-12-18)
+
+
+### Bug Fixes
+
+* resolve build errors and update OpenTelemetry packages ([c766ab0](https://github.com/beacontower/beacontower-api-template/commit/c766ab06998d3b66971e4c1dda2f939a1330561d))
+
 ## [1.0.2](https://github.com/beacontower/beacontower-api-template/compare/v1.0.1...v1.0.2) (2025-12-18)
 
 
