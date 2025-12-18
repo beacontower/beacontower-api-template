@@ -23,16 +23,6 @@ Three-layer architecture (API → Core → Infrastructure). Best for medium-to-l
 - Domain-driven design friendly
 - Testable business logic layer
 
-### 3. Vertical Slice Template
-Feature-focused CQRS architecture using MediatR. Best for complex domains with evolving requirements.
-
-**Features:**
-- All Minimal API features plus:
-- MediatR for CQRS pattern
-- Self-contained feature modules
-- BuildingBlocks for shared infrastructure
-- Contracts project for DTOs
-
 ## Getting Started
 
 ### Prerequisites
@@ -53,9 +43,6 @@ dotnet new bt-api-minimal -n MyApi
 
 # Create new project with Clean Architecture
 dotnet new bt-api-clean -n MyApi
-
-# Create new project with Vertical Slice
-dotnet new bt-api-slice -n MyApi
 ```
 
 #### Option 2: Clone and Copy
