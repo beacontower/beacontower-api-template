@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Http.Json;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using MyApi;
 using Xunit;
 
 namespace MyApi.IntegrationTests;
@@ -65,5 +66,7 @@ public class ApiTests : IClassFixture<WebApplicationFactory<Program>>
         forecasts.Should().HaveCount(5);
     }
 
-    private record HelloResponse(string Message, DateTime Timestamp);
+#pragma warning disable CA1812 // Instantiated by JSON deserialization
+    private sealed record HelloResponse(string Message, DateTime Timestamp);
+#pragma warning restore CA1812
 }

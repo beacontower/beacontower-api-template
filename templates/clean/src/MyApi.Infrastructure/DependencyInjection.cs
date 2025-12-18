@@ -10,7 +10,7 @@ namespace MyApi.Infrastructure;
 /// <summary>
 /// Infrastructure layer dependency injection extensions.
 /// </summary>
-public static class DependencyInjection
+public static class InfrastructureServiceExtensions
 {
     /// <summary>
     /// Adds infrastructure services to the service collection.

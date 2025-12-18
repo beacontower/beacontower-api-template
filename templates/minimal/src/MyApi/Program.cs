@@ -1,3 +1,4 @@
+using MyApi;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,14 +51,13 @@ api.MapGet("/hello", () => Results.Ok(new { Message = "Hello from MyApi!", Times
 
 api.MapGet("/weather", () =>
 {
-    var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
 #pragma warning disable CA5394 // Do not use insecure randomness - acceptable for example/demo code
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
             Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
+            WeatherForecast.Summaries[Random.Shared.Next(WeatherForecast.Summaries.Length)]
         ))
         .ToArray();
 #pragma warning restore CA5394
@@ -71,7 +71,12 @@ app.UseSerilogRequestLogging();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+namespace MyApi
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    public sealed record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+    {
+        internal static readonly string[] Summaries = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];
+
+        public int TemperatureF => (int)Math.Round(TemperatureC * 1.8 + 32);
+    }
 }

@@ -1,4 +1,5 @@
 using FluentAssertions;
+using MyApi;
 using Xunit;
 
 namespace MyApi.Tests;
