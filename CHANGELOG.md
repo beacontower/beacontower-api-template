@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/beacontower/beacontower-api-template/compare/v1.0.3...v1.0.4) (2026-02-14)
+
+
+### Bug Fixes
+
+* remove duplicate .github/.github directory from clean template ([5b0f4e4](https://github.com/beacontower/beacontower-api-template/commit/5b0f4e403a058927a8a64d7ca8fa8acb6cb4fb9b))
+
 ## [1.0.3](https://github.com/beacontower/beacontower-api-template/compare/v1.0.2...v1.0.3) (2025-12-18)
 
 
