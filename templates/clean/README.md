@@ -1,6 +1,6 @@
 # MyApi
 
-A .NET 10 Clean Architecture API with Aspire orchestration for Beacon Tower.
+A .NET 10 Clean Architecture API for Beacon Tower.
 
 ## Setup After Creating From Template
 
@@ -54,16 +54,7 @@ git push
 
 ## Development
 
-### Run with Aspire
-
-```bash
-cd src/MyApi.AppHost
-dotnet run
-```
-
-Open the Aspire Dashboard: http://localhost:15888
-
-### Run API Standalone
+### Run API
 
 ```bash
 cd src/MyApi.Api

@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Aspire PostgreSQL (includes EF Core) -->
-    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <!-- PostgreSQL via EF Core -->
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
 
     <!-- Redis -->
-    <PackageReference Include="Aspire.StackExchange.Redis" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
   </ItemGroup>
 
   <ItemGroup>

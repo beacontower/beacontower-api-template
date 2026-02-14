@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using MyApi.Core.Interfaces;
 using MyApi.Core.Services;
 using MyApi.Infrastructure.Data;
@@ -15,19 +15,20 @@ public static class InfrastructureServiceExtensions
     /// <summary>
     /// Adds infrastructure services to the service collection.
     /// </summary>
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IHostApplicationBuilder builder)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        // Add Database (with Aspire integration)
-        builder.AddNpgsqlDbContext<ApplicationDbContext>("myapidb");
+        // Add Database
+        services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseNpgsql(configuration.GetConnectionString("myapidb")));
 
-        // Add Redis (with Aspire integration)
-        builder.AddRedisClient("redis");
+        // Add Redis distributed cache
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = configuration.GetConnectionString("redis");
+        });
 
         // Register Core services
         services.AddScoped<IWeatherService, WeatherService>();
-
-        // Add other infrastructure services here
-        // Example: services.AddScoped<IRepository<T>, Repository<T>>();
 
         return services;
     }

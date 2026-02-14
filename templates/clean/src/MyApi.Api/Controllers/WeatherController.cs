@@ -30,7 +30,10 @@ public class WeatherController : ControllerBase
         [FromQuery] int days = 5,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting weather forecast for {Days} days", days);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Getting weather forecast for {Days} days", days);
+        }
 
         if (days < 1 || days > 30)
         {

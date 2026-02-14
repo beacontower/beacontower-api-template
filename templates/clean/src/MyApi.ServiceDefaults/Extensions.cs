@@ -10,14 +10,13 @@ using OpenTelemetry.Trace;
 namespace Microsoft.Extensions.Hosting;
 
 /// <summary>
-/// Service defaults for Aspire applications.
-/// Provides standard observability, health checks, and service discovery.
+/// Service defaults for observability, health checks, and HTTP resilience.
 /// </summary>
 public static class ServiceDefaultsExtensions
 {
     /// <summary>
     /// Adds service defaults to the host builder.
-    /// Includes OpenTelemetry, health checks, service discovery, and HTTP resilience.
+    /// Includes OpenTelemetry, health checks, and HTTP resilience.
     /// </summary>
     public static IHostApplicationBuilder AddServiceDefaults(this IHostApplicationBuilder builder)
     {
@@ -25,14 +24,9 @@ public static class ServiceDefaultsExtensions
 
         builder.ConfigureOpenTelemetry();
         builder.AddDefaultHealthChecks();
-        builder.Services.AddServiceDiscovery();
         builder.Services.ConfigureHttpClientDefaults(http =>
         {
-            // Turn on resilience by default
             http.AddStandardResilienceHandler();
-
-            // Turn on service discovery by default
-            http.AddServiceDiscovery();
         });
 
         return builder;

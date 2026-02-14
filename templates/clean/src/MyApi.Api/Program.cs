@@ -5,7 +5,7 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add service defaults & Aspire components
+// Add service defaults (OpenTelemetry, health checks, HTTP resilience)
 builder.AddServiceDefaults();
 
 // Configure Serilog
@@ -19,7 +19,7 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
     .WriteTo.Console());
 
 // Add Infrastructure layer (includes Core services)
-builder.Services.AddInfrastructure(builder);
+builder.Services.AddInfrastructure(builder.Configuration);
 
 // Add API services
 builder.Services.AddControllers();
@@ -30,7 +30,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Title = "MyApi",
         Version = "v1",
-        Description = "A Clean Architecture API built with .NET 10 and Aspire"
+        Description = "A Clean Architecture API built with .NET 10"
     });
 });
 
