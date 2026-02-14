@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/beacontower/beacontower-api-template/compare/v1.0.4...v1.0.5) (2026-02-14)
+
+
+### Bug Fixes
+
+* remove Aspire from bt-api-clean template ([5e2b81a](https://github.com/beacontower/beacontower-api-template/commit/5e2b81a5662870ddeee5f9f43296a4a908691ac5))
+
 ## [1.0.4](https://github.com/beacontower/beacontower-api-template/compare/v1.0.3...v1.0.4) (2026-02-14)
 
 
